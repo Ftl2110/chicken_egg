@@ -22,4 +22,3 @@ marshmallow
 python-dotenv
 gunicorn
 beautifulsoup4
-airflow
