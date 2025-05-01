@@ -1,5 +1,7 @@
 # Egg Prices, Bird Flu, and Cal-Main Profits
 
+By Fred Lee, Angel Ragas, and Arnav Sahai
+
 This project aims to explore the relation between the bird flu and Egg Price fluctuations. The main research aims are the following:
 1) What is the relationship between the increase of bird flu outbreaks and increases in Grade A egg prices? Is there a time lag?
 2) How does the stock price of Cal-Main Foods (biggest egg company in USA) respond to bird flu outbreak?
