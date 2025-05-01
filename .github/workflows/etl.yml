@@ -1,0 +1,46 @@
+name: Run ETL and Upload to BigQuery
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 0 * * *' 
+  workflow_dispatch:       # allows manual trigger; how about push?
+
+jobs:
+  etl-job:
+    runs-on: ubuntu-latest
+
+    env:
+      GOOGLE_APPLICATION_CREDENTIALS: service_account.json
+      GCP_PROJECT_ID: sipa-adv-c-arnav-fred
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+    # This part is different from the other yml file
+      - name: write service_account.json
+        run: echo '${{ secrets.GCP_SERVICE_ACCOUNT }}' > service_account.json
+
+      - name: Verify service_account.json
+        run: |
+          echo "---- service_account.json ----"
+          head -n 5 service_account.json
+          echo "---------------------------------------"
+
+      - name: Run ETL
+        run: |
+          python ETL.py
